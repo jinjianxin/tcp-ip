@@ -18,6 +18,7 @@ int main(int argc,char *argv[])
 
 	time_t ticks;
 
+	/*创建一个流套接字*/
 	listenfd = socket(AF_INET,SOCK_STREAM,0);
 
 	if(listenfd<0)
@@ -26,10 +27,13 @@ int main(int argc,char *argv[])
 		return -1;
 	}
 
+	/*用本机地址和6666端口号填充sockaddr_in*/
 	seraddr.sin_family = AF_INET;
 	seraddr.sin_port = htons(6666);
 	seraddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
+
+	/*将创建的套接字绑定在这个地址*/
 	if(bind(listenfd,(struct sockaddr*)&seraddr,sizeof(seraddr))<0)
 	{
 		printf("bind failed\n");
