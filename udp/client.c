@@ -38,16 +38,31 @@ int main()
 
         printf("send sucessful:%s\n",send_buf);
     }
-    recv_num = recvfrom(sock_fd,recv_buf,sizeof(recv_buf),0,(struct sockaddr *)&addr_serv,&dest_len);
-    if(recv_num <0 ) {
 
-        perror("recv_from");
-        exit(1);
-    } else {
-        printf("recv sucessful\n");
+    while(1)
+    {
+
+        recv_num = recvfrom(sock_fd,recv_buf,sizeof(recv_buf),0,(struct sockaddr *)&addr_serv,&dest_len);
+        if(recv_num <0 ) {
+
+            perror("recv_from");
+            exit(1);
+        } else {
+            printf("recv sucessful\n");
+        }
+        recv_buf[recv_num]='\0';
+        printf("the receive:%s\n",recv_buf);
+
+        send_num = sendto(sock_fd,send_buf,sizeof(send_buf),0,(struct sockaddr *)&addr_serv,dest_len);
+        if(send_num < 0) {
+            perror("sendto");
+            exit(1);
+       } else {
+
+        printf("send sucessful:%s\n",send_buf);
     }
-    recv_buf[recv_num]='\0';
-    printf("the receive:%s\n",recv_buf);
+
+    }
     close(sock_fd);
     return 0;
 
