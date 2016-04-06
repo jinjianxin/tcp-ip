@@ -13,16 +13,16 @@
 
 int main()
 {
-    int sock_fd;/*套接字文件描述符*/
+    int sock_fd;
     int send_num;
     int recv_num;
     int dest_len;
     char send_buf[20]= {"hello tiger"};
     char recv_buf[20];
-    struct sockaddr_in addr_serv;/*服务端地址，客户端地址*/
+    struct sockaddr_in addr_serv;
 
-    sock_fd = socket(AF_INET,SOCK_DGRAM,0);//创建套接子
-    //初始化服务器端地址
+    sock_fd = socket(AF_INET,SOCK_DGRAM,0);
+
     memset(&addr_serv,0,sizeof(addr_serv));
     addr_serv.sin_family = AF_INET;
     addr_serv.sin_addr.s_addr = inet_addr(DSET_IP_ADDRESS);
